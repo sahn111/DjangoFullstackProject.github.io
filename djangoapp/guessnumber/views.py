@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django import forms
 import random
 import datetime
@@ -52,9 +53,19 @@ def showguess(request):
         rate = 0
 
     return render(request, "guessnumber/showguess.html",{
+        "true_list" : request.session["true"],
+        "false_list" : request.session["false"], 
         "number": request.session["number"],
         "rate": rate,
     })
     
+def delete(request):
+
+    request.session["number"] = []
+    request.session["true"] = []
+    request.session["false"] = []
+
+    return HttpResponseRedirect(reverse("guessnumber:index"))
+
 def add(request):
     return render(request, "guessnumber/add.html")

@@ -25,9 +25,14 @@
                 <form action="{% url 'guessnumber:index' %}" method="post">
                     {% csrf_token %}
                     {{ form }}
-                    <input type = "submit">
+                    <br>
+                    <br>
+                    <input  class="button-5" type = "submit">
                 </form>
-                <a href="{% url 'guessnumber:showguess' %}">Show The results</a>
+                <br><br>
+                <form action="{% url 'guessnumber:showguess' %}" method="get">
+                    <button class="button-5" type="submit">Show The Results</button>
+                </form>
             </div>
         
         

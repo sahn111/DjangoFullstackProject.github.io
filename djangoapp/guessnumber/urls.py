@@ -6,5 +6,5 @@ app_name = "guessnumber"
 urlpatterns = [
     path("", views.guess, name="index"),
     path("showguess", views.showguess, name="showguess"),
-    path("add", views.add, name="add")
+    path("delete", views.delete, name="delete"),
 ]

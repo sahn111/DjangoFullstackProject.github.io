@@ -6,17 +6,35 @@
         <title>
             Submissions
         </title>
+        <link href="{% static 'guessnumber/style.css' %}" rel="stylesheet" >
         <body>
             <diV>
-                Your true rate is {{ rate }}
+                <h1>Your true rate is %{{ rate }}</h1>
             </diV>
             <div>
                 {% for num in number %}
-                    <li>{{ num }}</li>
+                    {% if num in true_list%}
+                        <li>{{ num }} - True</li>
+                    {% else %}
+                        <li>{{ num }} - False</li>
+                    {% endif %}
                 {% empty %}
                     <li>No Guess</li>
-                {% endfor %}    
-            </div>        
+                {% endfor %}  
+            </div>
+                <form action="{% url 'guessnumber:index' %}" method="get">
+                    <button class="button-5" type="submit">Make Guess</button>
+                </form>
+                <form action="{% url 'guessnumber:delete' %}" method="get">
+                    <button class="button-5" type="submit">Delete All Guesses</button>
+                </form>
+                <form action="{% url 'guessnumber:delete' %}" method="get">
+                    <button class="button-5" type="submit">Send Results as an Email</button>
+                </form>
+            <div>
+
+            </div>
+
         </body>
     </head>
 </html>
