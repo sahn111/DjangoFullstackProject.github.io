@@ -9,16 +9,25 @@
         <link href="{% static 'guessnumber/style.css' %}" rel="stylesheet" >
         <body>
             <div>
-                {% if number %}
-                    <h1>You guessed it !</h1>
+
+                {% if rand_num %}
+                    {% if number %}
+                        <h1>You guessed it !</h1>
+                    {% else %}
+                        <h1>Try again , number was {{ rand_num }}</h1>
+                    {% endif %}
                 {% else %}
-                    <h1>Try again :(</h1>
+                    <h1>Guess the number !</h1>
                 {% endif %}
             </div>
 
             <div class="entercenter">
-                <input type = "number" name = "numer">
-                <input type = "submit">
+                <form action="{% url 'guessnumber:index' %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type = "submit">
+                </form>
+                <a href="{% url 'guessnumber:showguess' %}">Show The results</a>
             </div>
         
         

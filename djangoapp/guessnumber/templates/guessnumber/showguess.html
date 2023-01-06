@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <title>
+            Submissions
+        </title>
+        <body>
+            <diV>
+                Your true rate is {{ rate }}
+            </diV>
+            <div>
+                {% for num in number %}
+                    <li>{{ num }}</li>
+                {% empty %}
+                    <li>No Guess</li>
+                {% endfor %}    
+            </div>        
+        </body>
+    </head>
+</html>

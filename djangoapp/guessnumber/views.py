@@ -1,14 +1,60 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django import forms
 import random
 import datetime
-# Create your views here.
 
-def guess(request, number):
-    num = random.randint(0,5)
-    print(f"Result is {num}")
+class GuessNumber(forms.Form):
+    number = forms.IntegerField(label = "Make Guess", min_value = 0, max_value =5)
 
-    return render(request, "guessnumber/index.html",{
-        "number": number==num
+def guess(request):
+    if "number" not in request.session and "true" not in request.session and "false" not in request.session:
+        request.session["number"] = []
+        request.session["true"] = []
+        request.session["false"] = []
+
+    if request.method == "POST":
+        form = GuessNumber(request.POST)
+        if form.is_valid():
+            num =   form.cleaned_data['number']
+            request.session["number"] += [num]
+            rand_num = random.randint(0,5)
+            print(f"Result is {rand_num}")
+            if num==rand_num:
+                request.session["true"] += [num]
+            else:
+                request.session["false"] += [num]
+
+            return render(request, "guessnumber/index.html",{
+                "rand_num":rand_num,
+                "number": num==rand_num,
+                "form" : GuessNumber() 
+            })
+        else:
+            return render(request, "guessnumber/index.html",{
+                "number": False,
+                "form" : GuessNumber() 
+            })
+
+    else:
+        return render(request, "guessnumber/index.html",{
+            "number": True,
+            "form" : GuessNumber() 
+        })
+
+def showguess(request):
+
+    if request.session["true"] != [] and request.session["false"] != []:
+        rate = len(request.session["true"])/(len(request.session["true"])+len(request.session["false"]))
+    elif request.session["true"] != [] and request.session["false"] == []:
+        rate = 100
+    else:
+        rate = 0
+
+    return render(request, "guessnumber/showguess.html",{
+        "number": request.session["number"],
+        "rate": rate,
     })
     
+def add(request):
+    return render(request, "guessnumber/add.html")
