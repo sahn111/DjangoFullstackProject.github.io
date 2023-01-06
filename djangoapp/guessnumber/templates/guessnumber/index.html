@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <title>
+            Did you guess succesfully ?
+        </title>
+        <link href="{% static 'guessnumber/style.css' %}" rel="stylesheet" >
+        <body>
+            <div>
+                {% if number %}
+                    <h1>You guessed it !</h1>
+                {% else %}
+                    <h1>Try again :(</h1>
+                {% endif %}
+            </div>
+
+            <div class="entercenter">
+                <input type = "number" name = "numer">
+                <input type = "submit">
+            </div>
+        
+        
+        </body>
+    </head>
+</html>
