@@ -6,14 +6,12 @@ from django.urls import reverse
 from django.conf import settings
 from djangoapp.forms.SendEmailForm import SendEmail 
 
-#continue and complete email operations
-
 def index(request):
     if request.method == "POST":
         form = SendEmail(request.POST)
         if form.is_valid():
             print("here")
-            user_email = form.cleaned_data["email"]#"9bc62cc6e55f3d@mailtrap.io"#
+            user_email = form.cleaned_data["email"]
             subject = 'Welcome to GuessNumber'
             message = f'Hi, thank you for playing, your success rate is {form.cleaned_data["rate"]}.'
             email_from = settings.EMAIL_HOST_USER

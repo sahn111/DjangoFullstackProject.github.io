@@ -19,14 +19,17 @@ def guess(request):
     if request.method == "POST":
         form = GuessNumber(request.POST)
         if form.is_valid():
-            num =   form.cleaned_data['number']
-            request.session["number"] += [num]
-            rand_num = random.randint(0,5)
+            num = form.cleaned_data['number']
+            rand_num = random.randint(1,5)
             print(f"Result is {rand_num}")
             if num==rand_num:
+                request.session["number"] += [{num : "True"}]
                 request.session["true"] += [num]
             else:
+                request.session["number"] += [{num : "False"}]
                 request.session["false"] += [num]
+            
+            print(request.session["number"])
 
             return render(request, "guessnumber/index.html",{
                 "rand_num":rand_num,

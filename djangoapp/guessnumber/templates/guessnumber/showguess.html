@@ -12,12 +12,10 @@
                 <h1>Your true rate is %{{ rate }}</h1>
             </diV>
             <div>
-                {% for num in number %}
-                    {% if num in true_list%}
-                        <li>{{ num }} - True</li>
-                    {% else %}
-                        <li>{{ num }} - False</li>
-                    {% endif %}
+                {% for num in number %} 
+                    {% for key, value in num.items %}
+                        <li>Guess: {{ key }} - Result: {{ value }}</li>
+                    {% endfor %}
                 {% empty %}
                     <li>No Guess</li>
                 {% endfor %}  
