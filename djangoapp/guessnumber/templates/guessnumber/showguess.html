@@ -28,7 +28,9 @@
                 <form action="{% url 'guessnumber:delete' %}" method="get">
                     <button class="button-5" type="submit">Delete All Guesses</button>
                 </form>
-                <form action="{% url 'guessnumber:delete' %}" method="get">
+                <form action="{% url 'emailsender:index' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
                     <button class="button-5" type="submit">Send Results as an Email</button>
                 </form>
             <div>

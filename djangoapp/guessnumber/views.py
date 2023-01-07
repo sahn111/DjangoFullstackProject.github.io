@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django import forms
+from django.conf import settings
 import random
 import datetime
+from djangoapp.forms.SendEmailForm import SendEmail
 
 class GuessNumber(forms.Form):
-    number = forms.IntegerField(label = "Make Guess", min_value = 0, max_value =5)
+    number = forms.IntegerField(label = "Make Guess", min_value = 1, max_value =5)
 
 def guess(request):
     if "number" not in request.session and "true" not in request.session and "false" not in request.session:
@@ -53,6 +55,7 @@ def showguess(request):
         rate = 0
 
     return render(request, "guessnumber/showguess.html",{
+        "form": SendEmail(initial={'rate':rate}),
         "true_list" : request.session["true"],
         "false_list" : request.session["false"], 
         "number": request.session["number"],
