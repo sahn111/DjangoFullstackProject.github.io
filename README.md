@@ -15,7 +15,9 @@ Project is created with:
 
 	
 ## Setup
-To run this project you can just write ```bash python3 manage.py runserver``` or ```bash python manage.py runserver``` to your comment line.
+
+To run this project first create <b>.env</b> file which has example version as <b>.env.example</b>. Then go to the <b>djangoapp</b> directory and just write 
+```python3 manage.py runserver``` or ```python manage.py runserver``` to your comment line.
 
 After you can reach the GuessNumber game from <a href = 'http://127.0.0.1:8000/guessnumber'>GuessNumber Game Link</a>
 
